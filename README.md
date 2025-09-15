@@ -2,10 +2,8 @@
 
 Bu proje, Google'ın [Google Analytics MCP ](https://github.com/googleanalytics/google-analytics-mcp) projesini temel alarak, Google Analytics verilerinizle doğal dilde sohbet etmenizi sağlayan bir web arayüzü sunar. Gemini AI'ın gücünü kullanarak, GA4 verilerinizi kolayca sorgulayabilir ve analiz edebilirsiniz.
 
-![Proje Arayüzü](httpshttps://via.placeholder.com/800x400.png?text=Proje+Ekran+G%C3%B6r%C3%BCnt%C3%BCs%C3%BC)
-*(Not: Bu alana kendi uygulamanızın ekran görüntüsünü ekleyebilirsiniz.)*
 
-## ✨ Öne Çıkan Özellikler
+## Öne Çıkan Özellikler
 
 - **Doğal Dil Sorgulama:** "Son 3 ayda en çok etkileşim alan ilk 10 sayfam hangisi?" gibi karmaşık soruları doğrudan sorun.
 - **Gemini AI Entegrasyonu:** Google'ın güçlü yapay zeka modeli ile GA4 verilerinizden anlamlı içgörüler elde edin.
@@ -13,13 +11,13 @@ Bu proje, Google'ın [Google Analytics MCP ](https://github.com/googleanalytics/
 - **Esnek Altyapı:** Orijinal Google Analytics MCP projesinin tüm gücünü ve esnekliğini devralır.
 - **Kolay Kurulum:** Flask ve React tabanlı yapısı sayesinde hızlıca ayağa kaldırılabilir.
 
-## 🛠️ Kullanılan Teknolojiler
+## Kullanılan Teknolojiler
 
 - **Backend:** Python, Flask, Google Analytics MCP, Gemini AI
 - **Frontend:** React, TypeScript, Material UI
 - **API:** Google Analytics Data API
 
-## 🚀 Kurulum ve Başlatma
+## Kurulum ve Başlatma
 
 Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
 
@@ -93,10 +91,7 @@ npm start
 
 Artık tarayıcınızda `http://localhost:3000` (veya React'in kullandığı port) adresine giderek uygulamanızı kullanmaya başlayabilirsiniz!
 
-## 🤝 Katkıda Bulunma
 
-Bu projeye katkıda bulunmak isterseniz, lütfen `CONTRIBUTING.md` dosyasını inceleyin. Pull request'ler ve issue'lar her zaman beklerim.
-
-## 📄 Lisans
+## Lisans
 
 Bu proje, [Apache 2.0 Lisansı](LICENSE) altında lisanslanmıştır.
