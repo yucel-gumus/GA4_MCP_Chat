@@ -68,6 +68,9 @@ pylintrc.test
 
 # Ignore credential files
 *.json
+!package.json
+!tsconfig.json
+!tsconfig.*.json
 *.private
 
 # Ignore environment files
