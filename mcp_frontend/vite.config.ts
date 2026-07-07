@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:8000",
+        target: "https://python-backend-270384591051.europe-west3.run.app",
         changeOrigin: true,
       },
     },
