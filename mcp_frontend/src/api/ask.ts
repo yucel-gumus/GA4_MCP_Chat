@@ -13,7 +13,8 @@ metadata: object;
 }
 
 export const askQuestion = async (query: string): Promise<AskResponse> => {
-  const response = await fetch('/api/ask', {
+  const apiBase = import.meta.env.VITE_API_URL || '';
+  const response = await fetch(`${apiBase}/api/ask`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
