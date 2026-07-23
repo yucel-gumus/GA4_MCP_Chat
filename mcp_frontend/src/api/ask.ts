@@ -14,7 +14,7 @@ metadata: object;
 
 export const askQuestion = async (query: string): Promise<AskResponse> => {
   const apiBase = import.meta.env.VITE_API_URL || '';
-  const apiKey = import.meta.env.VITE_API_KEY || 'a9c0347c273b6e94df81d6734fd6735a645d0f36ef0e5ea553901a95bc47de5f';
+  const apiKey = import.meta.env.VITE_API_KEY || '';
   const response = await fetch(`${apiBase}/api/ask`, {
     method: 'POST',
     headers: {
