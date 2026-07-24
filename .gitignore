@@ -71,6 +71,7 @@ pylintrc.test
 !package.json
 !tsconfig.json
 !tsconfig.*.json
+!vercel.json
 *.private
 
 # Ignore environment files
