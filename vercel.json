@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "cd mcp_frontend && npm install && npm run build",
-  "outputDirectory": "mcp_frontend/dist",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
     {
@@ -11,7 +11,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/mcp_frontend/index.html"
+      "destination": "/index.html"
     }
   ]
 }
