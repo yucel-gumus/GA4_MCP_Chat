@@ -202,7 +202,7 @@ function ChatPage(): React.ReactElement {
                   className={`flex items-center gap-1.5 mt-2 text-[10px] font-black text-[#7A5343] uppercase tracking-wider ${msg.sender === 'user' ? 'justify-end' : 'justify-start'
                     }`}
                 >
-                  <span>{msg.sender === 'user' ? 'Siz' : 'GA4 Asistanı'}</span>
+                  <span>{msg.sender === 'user' ? 'Siz' : 'KENSAI'}</span>
                   <span>•</span>
                   <span>{formatTime(msg.timestamp)}</span>
                 </div>
