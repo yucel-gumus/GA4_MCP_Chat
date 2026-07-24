@@ -1,4 +1,4 @@
-# GA4 MCP Chat (Google Analytics 4 + Gemini AI & MCP Agent)
+# GA4 MCP Chat (Google Analytics 4 + Vertex AI )
 
 Bu proje, Google Analytics 4 (GA4) verilerinize **doğal dilde (Türkçe/İngilizce)** sorular sorup gerçek zamanlı raporlar, analizler ve görselleştirmeler alabileceğiniz tam yığın (Full-Stack) bir yapay zeka uygulamasıdır. Proje, Google'ın **Model Context Protocol (MCP)** standartlarını temel alarak **Gemini 2.5/3.5** modellerini Google Analytics Data API ile entegre eder.
 
