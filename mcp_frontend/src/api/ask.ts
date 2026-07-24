@@ -68,7 +68,9 @@ export interface AskResponse {
 }
 
 export const askQuestion = async (query: string): Promise<AskResponse> => {
-  const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+  const envUrl = import.meta.env.VITE_API_URL;
+  // Route through pages-bff BFF Gateway by default to inject X-API-Key server-side safely
+  const apiBase = (envUrl && !envUrl.includes('python-backend') ? envUrl : 'https://pages-bff.vercel.app').replace(/\/$/, '');
   const endpoint = `${apiBase}/api/ask`;
   
   const response = await fetch(endpoint, {
