@@ -1,108 +1,128 @@
-# GA4 MCP Chat (Google Analytics 4 + Vertex AI )
+# 📊 GA4 MCP Chat - Google Analytics 4 AI Analytics Assistant
 
-Bu proje, Google Analytics 4 (GA4) verilerinize **doğal dilde (Türkçe/İngilizce)** sorular sorup gerçek zamanlı raporlar, analizler ve görselleştirmeler alabileceğiniz tam yığın (Full-Stack) bir yapay zeka uygulamasıdır. Proje, Google'ın **Model Context Protocol (MCP)** standartlarını temel alarak **Gemini 2.5/3.5** modellerini Google Analytics Data API ile entegre eder.
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Model Context Protocol](https://img.shields.io/badge/MCP-Protocol-purple?style=for-the-badge)](https://modelcontextprotocol.io/)
+[![Google Analytics 4](https://img.shields.io/badge/GA4-Data_API-E37400?style=for-the-badge&logo=google-analytics&logoColor=white)](https://developers.google.com/analytics)
+[![Portfolio](https://img.shields.io/badge/Portfolio-yucelgumus.dev-2563EB?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.yucelgumus.dev/)
 
----
-
-## 🛠️ Teknolojik Altyapı ve Mimarî
-Uygulama, veri güvenliğini korurken yapay zekanın dinamik olarak sorgu parametreleri oluşturmasını ve verileri yorumlamasını sağlayan katmanlı bir mimariye sahiptir:
-
-```
-[ mcp_frontend (React + TypeScript) ]
-         │  (HTTP POST /chat)
-         ▼
-[ Flask API (app.py) + Gemini Agent ] 
-         │  (Model-Driven Tool Calls)
-         ▼
-[ Google Analytics MCP Sunucusu ] ──(Google Analytics Data API)──► [ GA4 Property ]
-         ▲
-         │ (GCP Service Account Credentials JSON)
-```
-
-### Kullanılan Teknolojiler
-* **Frontend:** React.js, TypeScript, Material UI (MUI), Vite, Responsive UI layout.
-* **Backend:** Flask (Python 3.10+), `google-generativeai` (Gemini API SDK), `python-dotenv`, `nox` (test otomasyonu).
-* **AI/Protokol:** Google Analytics MCP (Model Context Protocol) entegrasyonu, Gemini Tool/Function Calling.
+> **Google Analytics 4 (GA4)** verilerini Model Context Protocol (MCP) ve yapay zeka ajanları ile doğal dilde sorgulayan, anlık raporlar oluşturan ve verileri interaktif grafiklerle görselleştiren modern analitik web arayüzü.
 
 ---
 
 ## 🌟 Öne Çıkan Özellikler
 
-* **Doğal Dil Raporlama:** *"Geçen ay en çok ziyaret edilen 5 sayfam hangisiydi?"* veya *"Son 3 günde mobil cihazlardan gelen trafik durumumuz nedir?"* gibi serbest metinli soruları algılar.
-* **Akıllı Mülk Eşleme (Auto-Discovery):** Sorgu sırasında kullanıcı doğrudan bir `property_id` belirtmezse, sistem arka planda otomatik olarak kullanıcının erişimi olan Google Analytics hesaplarını listeler, ilk mülkü (`property_id`) tespit eder ve sorguyu o mülk üzerinden çalıştırır.
-* **Yerleşik Raporlama Araçları (MCP Tools):**
-  * `get_account_summaries`: Google Analytics hesap ve mülk listesini hiyerarşik olarak getirir.
-  * `get_property_details`: Belirli bir mülkün detaylı yapılandırma ve metadata bilgilerini çeker.
-  * `get_custom_dimensions_and_metrics`: Mülk için tanımlanmış özel boyutları (custom dimensions) ve metrikleri sorgular.
-  * `run_report`: Belirlenen tarih aralıkları, boyutlar (dimensions), metrikler ve filtrelerle standart GA4 Data API raporları çalıştırır.
-  * `run_realtime_report`: Son 30 dakikaya ait anlık (realtime) trafik raporları sunar.
+- 💬 **Doğal Dil ile GA4 Sorgulama:** Karmaşık analitik raporlama terimlerine gerek kalmadan *"Geçen haftanın en çok ziyaret edilen sayfaları neler?"* gibi doğal dilde sorular sorun.
+- 🔌 **Model Context Protocol (MCP) Entegrasyonu:** LLM ajanlarının Google Analytics Data API ile güvenli ve standart bir protokol üzerinden konuşmasını sağlar.
+- 📊 **Özelleştirilmiş Veri Renderer Bileşenleri:**
+  - `AccountSummariesRenderer`: GA4 hesap ve mülk (Property) hiyerarşisinin dökümü.
+  - `GA4ReportRenderer`: Metrik ve boyut (Dimensions/Metrics) tabloları ve grafiksel özetler.
+  - `CustomDimensionsRenderer`: Özel boyut ve parametre eşleştirmeleri.
+  - `GenericJsonRenderer`: Dinamik ve ham JSON çıktıları için filtrelenebilir JSON görselleştirici.
+- ⚡ **Yüksek Hızlı Vite & React 18 Mimarisi:** TypeScript tip güvenliği ve anlık arayüz güncellemeleri.
+- 🎨 **Responsive & Temiz Kullanıcı Arayüzü:** Masaüstü ve mobil ekranlara tam uyumlu modern analitik paneli.
 
 ---
 
-## 🚀 Kurulum ve Yapılandırma
+## 🏗️ Mimari & Teknoloji Yığını
 
-### 1. Ön Gereksinimler
-* **Google Cloud Console** üzerinde bir proje ve bu projede **Google Analytics Data API** etkinleştirilmiş olmalıdır.
-* Mülkünüze erişim yetkisi olan bir **Service Account (Hizmet Hesabı)** oluşturulmalı ve buna ait `credentials.json` dosyası indirilmelidir.
-* **Gemini API Anahtarı** (`GEMINI_API_KEY`) edinilmelidir.
-
-### 2. Backend Kurulumu
-Proje kök dizininde:
-
-```bash
-# Sanal ortam oluşturun ve aktif edin
-python3 -m venv venv
-source venv/bin/activate
-
-# Gerekli bağımlılıkları ve projeyi geliştirme modunda yükleyin
-pip install -e .
+```mermaid
+graph TD
+    User([Kullanıcı / Analist]) <-->|Doğal Dil Sorguları| UI[GA4 MCP React Frontend]
+    UI <-->|Ask API / WebSocket| MCP[MCP Server & Gemini / LLM Engine]
+    MCP <-->|Google Analytics Data API| GA4[(Google Analytics 4 Properties)]
+    UI --> Renderers[Özel Görselleştiriciler: Raporlar, Boyutlar, Hesap Özetleri]
 ```
 
-### 3. Ortam Değişkenleri (`.env`)
-Proje kök dizininde bir `.env` dosyası oluşturun ve aşağıdaki değişkenleri tanımlayın:
+| Kategori | Teknoloji / Kütüphane | Açıklama |
+| :--- | :--- | :--- |
+| **Frontend Framework** | React 18 + TypeScript | Modüler bileşen yapısı ve tip güvenliği |
+| **Build Tool** | Vite | Ultra hızlı geliştirme ve üretim derlemesi |
+| **Protokol / Entegrasyon** | Model Context Protocol (MCP) | LLM araç çağrıları (Tool Calling) ve veri akışı |
+| **Veri Kaynağı** | Google Analytics 4 Data API | Gerçek zamanlı ve geçmiş oturum, dönüşüm ve trafik metrikleri |
+| **Styling & Icons** | Modern CSS & SVG Icons | Optimize edilmiş hafif stiller ve ikonlar |
 
-```env
-GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/your/ga4-credentials.json
-GOOGLE_PROJECT_ID=gcp-project-id-xyz
-GEMINI_API_KEY=AIzaSy...your_gemini_api_key
-PORT=5000
-```
+---
 
-### 4. Frontend Kurulumu
+## 🚀 Hızlı Başlangıç
+
+### Gereksinimler
+- **Node.js**: v18.0 veya üzeri
+- **npm** ya da **yarn** / **pnpm**
+- Yapılandırılmış bir MCP Backend servisi veya GA4 API anahtarı
+
+### Kurulum
+
 ```bash
-cd mcp_frontend
+# Depoyu klonlayın
+git clone https://github.com/yucel-gumus/GA4_MCP_Chat.git
+cd GA4_MCP_Chat/mcp_frontend
+
+# Bağımlılıkları yükleyin
 npm install
+
+# Geliştirme sunucusunu başlatın
+npm run dev
+```
+
+Uygulama varsayılan olarak `http://localhost:5173` adresinde çalışacaktır.
+
+### Üretim Derlemesi (Production Build)
+
+```bash
+npm run build
+npm run preview
 ```
 
 ---
 
-## 💻 Çalıştırma
+## 📂 Proje Dizin Yapısı
 
-### Backend & MCP Sunucusunu Başlatma
-Proje kök dizinindeki `start.sh` scripti, gerekli ortam değişkenleriyle MCP sunucusunu ve Flask backend sunucusunu otomatik olarak başlatır:
-
-```bash
-chmod +x start.sh
-./start.sh
 ```
-
-### Frontend'i Başlatma
-```bash
-cd mcp_frontend
-npm start
+GA4_MCP_Chat/
+├── vercel.json
+├── mcp_frontend/
+│   ├── index.html
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   └── src/
+│       ├── main.tsx
+│       ├── App.tsx
+│       ├── api/
+│       │   └── ask.ts                  # MCP sorgu istek katmanı
+│       └── features/chat/
+│           ├── components/
+│           │   ├── ChatPage.tsx        # Ana sohbet penceresi
+│           │   └── renderers/          # GA4'e özel veri renderer'ları
+│           │       ├── GA4ReportRenderer.tsx
+│           │       ├── AccountSummariesRenderer.tsx
+│           │       ├── CustomDimensionsRenderer.tsx
+│           │       └── GenericJsonRenderer.tsx
+│           ├── hooks/
+│           │   └── useAskApi.ts        # Chat state & API entegrasyon kancası
+│           └── utils/
+│               └── filterAnalyticsData.ts
 ```
-Uygulama varsayılan olarak `http://localhost:3000` adresinde çalışacaktır.
 
 ---
 
-## 🧪 Test ve Kalite Güvencesi
-Proje içinde nox otomasyon aracı ile testleri koşturabilirsiniz:
+## 📄 Lisans
+Bu proje [MIT Lisansı](LICENSE) ile korunmaktadır.
 
-```bash
-# Nox ile testleri çalıştırın
-nox
-```
+---
 
-## 🔒 Güvenlik
-* Google Service Account kimlik bilgilerini barındıran JSON dosyanızı kesinlikle git repolarına veya açık kaynak mecralara **commit etmeyin**.
-* Üretim (Production) ortamlarında CORS ayarlarını sınırlandırın ve kullanıcı kimlik doğrulaması ekleyin.
+## 👨‍💻 Geliştirici & İletişim
+
+**Yücel Gümüş** - Full Stack Developer
+
+- 🌐 **Web Sitesi / Portfolyo:** [yucelgumus.dev](https://www.yucelgumus.dev/)
+- 💼 **LinkedIn:** [linkedin.com/in/yucel-gumus](https://www.linkedin.com/in/yucel-gumus/)
+- 🐙 **GitHub:** [@yucel-gumus](https://github.com/yucel-gumus)
+
+<p align="left">
+  <a href="https://www.yucelgumus.dev/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Developed%20by-Yücel%20Gümüş-blue?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Yücel Gümüş Portfolio" />
+  </a>
+</p>
