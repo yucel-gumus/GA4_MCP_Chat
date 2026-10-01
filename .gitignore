@@ -78,4 +78,4 @@ pylintrc.test
 .env
 
 .env
-_frontend/node_modules
+.vercel/
