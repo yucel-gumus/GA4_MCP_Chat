@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.yucelgumus.dev/api/$1"
+      "destination": "https://python-backend-270384591051.europe-west3.run.app/api/$1"
     },
     {
       "source": "/(.*)",
