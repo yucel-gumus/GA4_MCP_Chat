@@ -69,15 +69,20 @@ export interface AskResponse {
 
 export const askQuestion = async (query: string): Promise<AskResponse> => {
   const envUrl = import.meta.env.VITE_API_URL;
-  // Route through pages-bff BFF Gateway by default to inject X-API-Key server-side safely
-  const apiBase = (envUrl && !envUrl.includes('python-backend') ? envUrl : 'https://pages-bff.vercel.app').replace(/\/$/, '');
+  const apiKey = import.meta.env.VITE_API_KEY || '';
+  const apiBase = (envUrl || (import.meta.env.PROD ? 'https://api.yucelgumus.dev' : '')).replace(/\/$/, '');
   const endpoint = `${apiBase}/api/ask`;
   
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (apiKey) {
+    headers['X-API-Key'] = apiKey;
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({ query }),
   });
 

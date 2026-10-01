@@ -5,7 +5,10 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const proxyTarget = env.VITE_PROXY_TARGET || process.env.VITE_PROXY_TARGET || "https://python-backend-270384591051.europe-west3.run.app";
+  const proxyTarget =
+    env.VITE_PROXY_TARGET ||
+    process.env.VITE_PROXY_TARGET ||
+    (mode === 'development' ? 'http://127.0.0.1:8000' : 'https://api.yucelgumus.dev');
   const apiKey = env.VITE_API_KEY || process.env.CLIENT_API_KEY || '';
 
   const headers: Record<string, string> = {};
