@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const proxyTarget =
     env.VITE_PROXY_TARGET ||
     process.env.VITE_PROXY_TARGET ||
-    (mode === 'development' ? 'http://127.0.0.1:8000' : 'https://api.yucelgumus.dev');
+    (mode === 'development' ? 'http://127.0.0.1:8000' : 'https://python-backend-270384591051.europe-west3.run.app');
   const apiKey = env.VITE_API_KEY || process.env.CLIENT_API_KEY || '';
 
   const headers: Record<string, string> = {};

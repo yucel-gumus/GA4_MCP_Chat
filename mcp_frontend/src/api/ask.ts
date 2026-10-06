@@ -70,7 +70,7 @@ export interface AskResponse {
 export const askQuestion = async (query: string): Promise<AskResponse> => {
   const envUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY || '';
-  const apiBase = (envUrl || (import.meta.env.PROD ? 'https://api.yucelgumus.dev' : '')).replace(/\/$/, '');
+  const apiBase = (envUrl || (import.meta.env.PROD ? 'https://python-backend-270384591051.europe-west3.run.app' : '')).replace(/\/$/, '');
   const endpoint = `${apiBase}/api/ask`;
   
   const headers: Record<string, string> = {
