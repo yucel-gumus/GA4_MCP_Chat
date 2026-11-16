@@ -2,15 +2,21 @@
 
 @layer base {
   :root {
-    /* 60-30-10 Color System Tokens */
-    --color-bg-60: #FFEBD3;       /* 60% Dominant Base: Soft Cream */
-    --color-surface-30: #FFB6A6;  /* 30% Secondary Structure: Warm Coral */
-    --color-accent-10: #9BCEC1;   /* 10% Accent CTA/Highlights: Sage Mint */
-    
-    /* Contrast Text & Fills derived from palette harmony */
-    --color-text-main: #3D261C;   /* Deep Warm Terracotta Brown for high contrast readability */
-    --color-text-sub: #7A5343;    /* Medium Warm Terracotta Brown */
-    --color-border-subtle: rgba(255, 182, 166, 0.35);
+    /* 60-30-10 "İpek Küllü Arduvaz" Color System Tokens */
+    --color-bg-60: #EDF3EE;       /* 60% Dominant: Açık Sis Yeşili page bg */
+    --color-bg-soft: #F5F9F5;     /* 60% Dominant: Açık Sis Yeşili soft surface */
+    --color-bg-hover: #DBE6DD;    /* 60% Dominant: hover / band / calm tag bg */
+
+    --color-surface-30: #DCE3EA;  /* 30% Secondary: Küllü Arduvaz cards / bars */
+    --color-border-30: #BCC7D2;   /* 30% Secondary: borders, dividers, tracks */
+    --color-text-sub: #3E5164;    /* 30% Secondary: muted text / labels */
+    --color-text-main: #253341;   /* 30% Secondary: primary text & icons */
+
+    --color-accent-soft: #F2A488; /* 10% Accent: Kiremit-Mercan soft highlight */
+    --color-accent-10: #EC7D55;   /* 10% Accent: Kiremit-Mercan CTA / active */
+    --color-accent-hover: #AB421C;/* 10% Accent: Kiremit-Mercan hover / alert */
+
+    --color-border-subtle: rgba(188, 199, 210, 0.55);
   }
 
   body {
@@ -27,22 +33,22 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 235, 211, 0.5);
+  background: rgba(237, 243, 238, 0.7);
 }
 ::-webkit-scrollbar-thumb {
-  background: #FFB6A6;
+  background: #BCC7D2;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9BCEC1;
+  background: #EC7D55;
 }
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(155, 206, 193, 0.4);
+    box-shadow: 0 0 15px rgba(236, 125, 85, 0.25);
   }
   50% {
-    box-shadow: 0 0 25px rgba(155, 206, 193, 0.8);
+    box-shadow: 0 0 25px rgba(236, 125, 85, 0.5);
   }
 }
 
