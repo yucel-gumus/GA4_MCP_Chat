@@ -10,15 +10,36 @@ export const GA4ReportRenderer: React.FC<GA4ReportRendererProps> = ({ data }) =>
     return null;
   }
 
-  // Calculate totals for quick overview cards
+  // Calculate summary totals/averages for quick overview cards
+  const isRateMetric = (name: string, type_?: string) => {
+    const lower = name.toLowerCase();
+    return (
+      lower.includes('rate') ||
+      lower.includes('percent') ||
+      lower.includes('ratio') ||
+      lower.includes('durationper') ||
+      type_ === 'TYPE_FLOAT' && (lower.includes('rate') || lower.includes('bounce') || lower.includes('engagement'))
+    );
+  };
+
   const totals: Record<string, number> = {};
   data.metric_headers.forEach((header, mIdx) => {
     let sum = 0;
+    let count = 0;
     data.rows?.forEach((row) => {
-      const val = parseFloat(row.metric_values[mIdx]?.value || '0');
-      if (!isNaN(val)) sum += val;
+      const val = parseFloat(row.metric_values[mIdx]?.value || '');
+      if (!isNaN(val)) {
+        sum += val;
+        count += 1;
+      }
     });
-    totals[header.name] = sum;
+    if (count > 0 && isRateMetric(header.name, header.type_)) {
+      const avg = sum / count;
+      // GA4 API sometimes returns 0..1 rates (e.g. 0.65) or 0..100 percentages
+      totals[header.name] = avg <= 1 ? avg * 100 : avg;
+    } else {
+      totals[header.name] = sum;
+    }
   });
 
   const friendlyNames: Record<string, string> = {
